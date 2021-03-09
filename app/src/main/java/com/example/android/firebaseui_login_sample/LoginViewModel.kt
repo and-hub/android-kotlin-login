@@ -63,9 +63,9 @@ class LoginViewModel : ViewModel() {
         val defaultFactType = context.resources.getStringArray(R.array.fact_type)[0]
         val funFactType = sharedPreferences.getString(factTypePreferenceKey, defaultFactType)
 
-        return if (funFactType == defaultFactType)
-            androidFacts[Random.nextInt(0, androidFacts.size)]
-        else
-            californiaFacts[Random.nextInt(0, californiaFacts.size)]
+        return when (funFactType) {
+            defaultFactType -> androidFacts[Random.nextInt(0, androidFacts.size)]
+            else -> californiaFacts[Random.nextInt(0, californiaFacts.size)]
+        }
     }
 }
